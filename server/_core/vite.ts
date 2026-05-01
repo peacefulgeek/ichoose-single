@@ -3,8 +3,11 @@ import fs from "fs";
 import { type Server } from "http";
 import { nanoid } from "nanoid";
 import path from "path";
-import { createServer as createViteServer } from "vite";
+import { createServer as createViteServer, type ViteDevServer } from "vite";
 import viteConfig from "../../vite.config";
+import { registerSsrRoutes } from "../ssrHead";
+
+const APEX_HOST = process.env.SITE_APEX_HOST || "singlebydesign.life";
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
@@ -13,7 +16,7 @@ export async function setupVite(app: Express, server: Server) {
     allowedHosts: true as const,
   };
 
-  const vite = await createViteServer({
+  const vite: ViteDevServer = await createViteServer({
     ...viteConfig,
     configFile: false,
     server: serverOptions,
@@ -21,6 +24,10 @@ export async function setupVite(app: Express, server: Server) {
   });
 
   app.use(vite.middlewares);
+
+  // SSR head injection runs BEFORE the catch-all so it owns / and /articles/*.
+  registerSsrRoutes(app, { apex: APEX_HOST, vite });
+
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -59,6 +66,9 @@ export function serveStatic(app: Express) {
   }
 
   app.use(express.static(distPath));
+
+  // SSR head injection runs BEFORE the catch-all in production too.
+  registerSsrRoutes(app, { apex: APEX_HOST });
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
