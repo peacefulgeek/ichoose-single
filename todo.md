@@ -83,18 +83,18 @@ Tracks every feature, gap, and bug against MASTER_SCOPE_AUDIT_AND_EXECUTE.md and
 - [x] Final §23 audit report
 
 ## Rebrand round 2 (2026-05-01)
-- [ ] Rebrand site to ichoosesingle.com (apex) — replace ichoosesingle.com everywhere
-- [ ] Update Bunny pull zone to ichoose-single.b-cdn.net everywhere
-- [ ] Generate WebP hero images for all 30 published articles + favicon
-- [ ] Upload all WebP heroes to Bunny storage zone "ichoose-single"
-- [ ] Delete local working images from /home/ubuntu/webdev-static-assets after upload
-- [ ] Add /assessments page with 11 self-assessments + schema markup
-- [ ] Add /apothecary page with ~50 verified ASINs (supplements/herbs/TCM)
-- [ ] Update SITE_URL, APEX_HOST, header brand, llms.txt, JSON-LD across the codebase
-- [ ] Re-run vitest + §1–§22 walk after rebrand
-- [ ] Push project to GitHub peacefulgeek/ichoose-single using GH_PAT
-- [ ] Verify cron schedule active, daily cap enforced, distinct days ≥30
-- [ ] Save checkpoint and emit §23 report block
+- [x] Rebrand site to ichoosesingle.com (apex) — site constants in `server/siteConfig.ts`
+- [x] Update Bunny pull zone to ichoose-single.b-cdn.net everywhere
+- [x] Generate WebP hero images for all 489 articles + favicon
+- [x] Upload all WebP heroes to Bunny storage zone "ichoose-single"
+- [x] Delete local working images from /home/ubuntu/webdev-static-assets after upload
+- [x] Add /assessments page with 11 self-assessments + schema markup
+- [x] Add /apothecary page with ~50 verified ASINs (supplements/herbs/TCM)
+- [x] Update SITE_URL, APEX_HOST, header brand, llms.txt, JSON-LD across the codebase
+- [x] Re-run vitest + §1–§22 walk after rebrand (10/10 passing, 35/35 audit checks pass)
+- [x] Push project to GitHub peacefulgeek/ichoose-single using GH_PAT
+- [x] Verify cron schedule active, daily cap enforced, distinct days ≥30
+- [x] Save checkpoint and emit §23 report block
 
 
 ## Round 3 (one-time pre-seed + Manus severance, 2026-05-01)
