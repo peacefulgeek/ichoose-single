@@ -19,6 +19,19 @@ function extractHeadings(html: string): Heading[] {
   return out;
 }
 
+const CATEGORY_LABELS: Record<string, string> = {
+  "intentional-singlehood": "Intentional Singlehood",
+  "self-partnering": "Self-Partnering",
+  "solo-living": "Solo Living",
+  "solo-travel": "Solo Travel",
+  "solo-finance": "Solo Finance",
+  "single-women": "Single Women",
+  "single-men": "Single Men",
+  "single-parents": "Single Parents",
+  "relationship-escalator": "Off the Escalator",
+  "dating-on-your-terms": "Dating On Your Terms",
+};
+
 export default function Article() {
   const { slug } = useParams<{ slug: string }>();
   const { data, loading, error } = useArticle(slug);
@@ -36,7 +49,7 @@ export default function Article() {
 
   if (loading) {
     return (
-      <div className="container py-20 flex items-center gap-3" style={{ color: "#6B6B66" }}>
+      <div className="container py-32 flex items-center gap-3" style={{ color: "rgba(31,20,34,0.55)" }}>
         <Loader2 className="animate-spin" /> Loading essay…
       </div>
     );
@@ -44,21 +57,20 @@ export default function Article() {
 
   if (error || !data) {
     return (
-      <div className="container py-20 text-center">
-        <h1 className="text-2xl font-bold">Essay not found</h1>
-        <p style={{ color: "#6B6B66" }} className="mt-2">It may have been retired or moved.</p>
-        <Link href="/articles" className="inline-block mt-4 px-5 py-2 rounded-full" style={{ background: "#E8604C", color: "#FFFEF9" }}>
+      <div className="container py-32 text-center">
+        <h1 className="display-serif" style={{ fontSize: "2.4rem" }}>Essay not found</h1>
+        <p style={{ color: "rgba(31,20,34,0.55)" }} className="mt-3">It may have been retired or moved.</p>
+        <Link href="/articles" className="btn-primary mt-6 inline-flex">
           Browse all essays
         </Link>
       </div>
     );
   }
 
-  // Bunny CDN hero on top, deterministic gradient underneath as fallback.
-  const fallback = heroDataUrl(data.slug, data.title);
-  const hero = data.heroUrl ? `url("${data.heroUrl}"), url("${fallback}")` : `url("${fallback}")`;
+  const heroImg = data.heroUrl || heroDataUrl(data.slug, data.title);
   const datetime = new Date(data.publishedAt);
   const modified = new Date(data.lastModifiedAt);
+  const categoryLabel = CATEGORY_LABELS[data.category] || data.category.replace(/-/g, " ");
 
   function toggleSave() {
     try {
@@ -77,44 +89,39 @@ export default function Article() {
 
   return (
     <article>
-      {/* Full-bleed hero band */}
-      <div
-        className="w-full"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgba(255,254,249,0) 30%, #FFFEF9 100%), ${hero}`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          aspectRatio: "16 / 6",
-          minHeight: 220,
-        }}
-      />
-
-      <div className="container -mt-12 relative">
-        <div className="max-w-3xl">
-          <Link href={`/articles?cat=${data.category}`} className="inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full" style={{ background: "#FFFEF9", color: "#E8604C", border: "1px solid #F8E2DD" }}>
-            {data.category.replace(/-/g, " ")}
-          </Link>
-          <h1 className="mt-3 text-3xl md:text-5xl font-extrabold leading-[1.05]" style={{ color: "#2B2B2B" }}>
-            {data.title}
-          </h1>
-          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 items-center text-sm" style={{ color: "#6B6B66" }}>
-            <span>By <Link href="/author/the-oracle-lover" style={{ color: "#E8604C", fontWeight: 600 }}>{data.authorName}</Link></span>
-            <span className="inline-flex items-center gap-1.5">
-              <Calendar size={14} />
-              <time dateTime={datetime.toISOString()}>{datetime.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</time>
-            </span>
-            {modified.getTime() > datetime.getTime() + 24 * 3600 * 1000 && (
-              <span className="text-xs">Updated <time dateTime={modified.toISOString()}>{modified.toLocaleDateString()}</time></span>
-            )}
-            <span className="inline-flex items-center gap-1.5">
-              <FileText size={14} />
-              {data.wordCount.toLocaleString()} words · ~{Math.max(1, Math.round(data.wordCount / 220))} min read
-            </span>
+      {/* ============ Cinematic editorial hero ============ */}
+      <section className="article-hero grain">
+        <img src={heroImg} alt="" className="bg" />
+        <div className="container relative py-24 md:py-32 inner">
+          <div className="max-w-3xl">
+            <Link href={`/articles?cat=${data.category}`} className="editorial-eyebrow inline-block" style={{ color: "#F2B33D" }}>
+              {categoryLabel}
+            </Link>
+            <h1 className="mt-5">{data.title}</h1>
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 items-center text-sm" style={{ color: "rgba(251,247,238,0.86)" }}>
+              <span>
+                By <Link href="/author/the-oracle-lover" style={{ color: "#F2B33D", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 4 }}>{data.authorName}</Link>
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Calendar size={14} />
+                <time dateTime={datetime.toISOString()}>
+                  {datetime.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}
+                </time>
+              </span>
+              {modified.getTime() > datetime.getTime() + 24 * 3600 * 1000 && (
+                <span className="text-xs">Updated <time dateTime={modified.toISOString()}>{modified.toLocaleDateString()}</time></span>
+              )}
+              <span className="inline-flex items-center gap-1.5">
+                <FileText size={14} />
+                {data.wordCount.toLocaleString()} words · ~{Math.max(1, Math.round(data.wordCount / 220))} min read
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="container py-8">
+      {/* ============ Body ============ */}
+      <div className="container py-12 md:py-16">
         <div className="article-layout">
           <div>
             {headings.length > 0 && (
@@ -126,9 +133,18 @@ export default function Article() {
             )}
             <div className="prose-warm" dangerouslySetInnerHTML={{ __html: data.bodyHtml }} />
 
-            <div className="flex flex-wrap gap-3 mt-8 pt-6 border-t" style={{ borderColor: "rgba(43,43,43,0.10)" }}>
-              <button onClick={toggleSave} className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium" style={{ background: saved ? "#2AA5A0" : "#F8F2E5", color: saved ? "#FFFEF9" : "#2B2B2B" }}>
-                <Bookmark size={16} fill={saved ? "currentColor" : "none"} /> {saved ? "Saved" : "Save for later"}
+            <div className="flex flex-wrap gap-3 mt-10 pt-8" style={{ borderTop: "1px solid rgba(42,15,51,0.12)" }}>
+              <button
+                onClick={toggleSave}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-colors"
+                style={{
+                  background: saved ? "#1AA39A" : "#FBF7EE",
+                  color: saved ? "#FBF7EE" : "#2A0F33",
+                  border: saved ? "none" : "1.5px solid #2A0F33",
+                }}
+              >
+                <Bookmark size={16} fill={saved ? "currentColor" : "none"} />
+                {saved ? "Saved" : "Save for later"}
               </button>
               <button
                 onClick={() => {
@@ -138,31 +154,46 @@ export default function Article() {
                     navigator.clipboard.writeText(window.location.href);
                   }
                 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium"
-                style={{ background: "#FFFEF9", color: "#2B2B2B", border: "1px solid rgba(43,43,43,0.15)" }}
+                className="btn-ghost"
+                style={{ padding: "0.6rem 1.25rem", fontSize: "0.95rem" }}
               >
                 <Share2 size={16} /> Share this essay
               </button>
             </div>
           </div>
 
+          {/* ===== Sidebar ===== */}
           <aside className="lg-only">
-            <div className="sticky top-24 space-y-6">
-              <div className="p-5 rounded-2xl" style={{ background: "#F8F2E5" }}>
-                <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#2AA5A0" }}>About the author</div>
-                <div className="font-semibold text-lg" style={{ color: "#2B2B2B" }}>The Oracle Lover</div>
-                <p className="mt-2 text-sm" style={{ color: "#6B6B66" }}>
-                  Editor and reviewer at I Choose Single. Writes essays on intentional singlehood and self-partnering, and reviews every product link before it ships.
+            <div className="sticky top-24 space-y-5">
+              <div className="rounded-2xl p-6" style={{ background: "linear-gradient(135deg, #2A0F33 0%, #4A1942 100%)", color: "#FBF7EE" }}>
+                <div className="editorial-eyebrow" style={{ color: "#F2B33D" }}>About the author</div>
+                <div className="font-serif text-xl mt-2" style={{ fontFamily: "Fraunces, serif", fontWeight: 600, color: "#FBF7EE" }}>
+                  The Oracle Lover
+                </div>
+                <p className="mt-3 text-sm" style={{ color: "rgba(251,247,238,0.82)", lineHeight: 1.6 }}>
+                  Editor and reviewer at I Choose Single. Writes about intentional singlehood,
+                  self-partnering, and reviews every product link before it ships.
                 </p>
-                <Link href="/author/the-oracle-lover" className="inline-block mt-3 text-sm font-semibold" style={{ color: "#E8604C" }}>Read more from this author →</Link>
+                <Link
+                  href="/author/the-oracle-lover"
+                  className="inline-block mt-4 text-sm font-semibold"
+                  style={{ color: "#F2B33D" }}
+                >
+                  Read more from this author →
+                </Link>
               </div>
+
               {data.internalLinks.length > 0 && (
-                <div className="p-5 rounded-2xl border" style={{ borderColor: "rgba(43,43,43,0.10)" }}>
-                  <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#E8604C" }}>Read next</div>
-                  <ul className="space-y-3">
+                <div className="rounded-2xl p-6" style={{ background: "#FBF7EE", border: "1px solid rgba(42,15,51,0.12)" }}>
+                  <div className="editorial-eyebrow">Read next</div>
+                  <ul className="space-y-3 mt-3">
                     {data.internalLinks.slice(0, 4).map(l => (
                       <li key={l.slug}>
-                        <Link href={`/articles/${l.slug}`} className="font-medium" style={{ color: "#2B2B2B" }}>
+                        <Link
+                          href={`/articles/${l.slug}`}
+                          className="font-serif text-base"
+                          style={{ fontFamily: "Fraunces, serif", color: "#2A0F33", fontWeight: 500, lineHeight: 1.3, display: "block" }}
+                        >
                           {l.title}
                         </Link>
                       </li>
@@ -170,10 +201,13 @@ export default function Article() {
                   </ul>
                 </div>
               )}
-              <div className="p-5 rounded-2xl" style={{ background: "#FFFEF9", border: "1px solid rgba(43,43,43,0.10)" }}>
-                <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#2AA5A0" }}>Affiliate disclosure</div>
-                <p className="text-sm" style={{ color: "#6B6B66" }}>
-                  I Choose Single is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate we earn from qualifying purchases. <Link href="/disclosures" style={{ color: "#E8604C" }}>Read the full disclosure</Link>.
+
+              <div className="rounded-2xl p-6" style={{ background: "rgba(26,163,154,0.08)", border: "1px solid rgba(26,163,154,0.20)" }}>
+                <div className="editorial-eyebrow" style={{ color: "#1AA39A" }}>Affiliate disclosure</div>
+                <p className="text-sm mt-2" style={{ color: "rgba(31,20,34,0.78)", lineHeight: 1.55 }}>
+                  We participate in the Amazon Services LLC Associates Program. As an Amazon Associate
+                  we earn from qualifying purchases.{" "}
+                  <Link href="/disclosures" style={{ color: "#F25C54", fontWeight: 600 }}>Read more</Link>.
                 </p>
               </div>
             </div>

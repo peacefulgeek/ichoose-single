@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Loader2, Send, Check } from "lucide-react";
+import { Loader2, Send, Check, Mail } from "lucide-react";
+
+const CONTACT_HERO = "https://ichoose-single.b-cdn.net/site/contact.webp";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -31,32 +33,94 @@ export default function Contact() {
     }
   }
 
-  return (
-    <div className="container py-12 max-w-2xl">
-      <h1 className="text-3xl md:text-5xl font-extrabold" style={{ color: "#2B2B2B" }}>Contact</h1>
-      <p className="mt-3" style={{ color: "#6B6B66" }}>
-        Editorial questions, story pitches, accuracy corrections. We read every message and reply within a few days.
-      </p>
+  const inputStyle: React.CSSProperties = {
+    borderColor: "rgba(42,15,51,0.18)",
+    background: "#FBF7EE",
+    color: "#1F1422",
+    fontFamily: "Inter, system-ui, sans-serif",
+  };
 
-      <form onSubmit={submit} className="mt-8 space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: "#2B2B2B" }}>Your name</label>
-          <input value={name} onChange={e => setName(e.target.value)} required className="w-full px-4 py-2.5 rounded-xl border" style={{ borderColor: "rgba(43,43,43,0.15)", background: "#FFFEF9" }} />
+  return (
+    <div>
+      <section className="container py-16 md:py-24">
+        <div className="grid md:grid-cols-12 gap-12 items-start">
+          <div className="md:col-span-5">
+            <div className="hero-photo grain" style={{ aspectRatio: "4 / 5", borderRadius: "1.5rem", overflow: "hidden", boxShadow: "0 30px 60px -20px rgba(74,25,66,0.30)" }}>
+              <img src={CONTACT_HERO} alt="A warm, candle-lit writing desk where letters get answered" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
+            <div className="mt-8 rounded-2xl p-6" style={{ background: "linear-gradient(135deg, #2A0F33, #4A1942)", color: "#FBF7EE" }}>
+              <Mail size={24} style={{ color: "#F2B33D" }} />
+              <h3 className="display-serif mt-3" style={{ color: "#FBF7EE", fontSize: "1.3rem" }}>We answer every letter.</h3>
+              <p className="mt-2 text-sm" style={{ color: "rgba(251,247,238,0.82)", lineHeight: 1.6 }}>
+                Editorial questions, story pitches, accuracy corrections.
+                Usually within a few days, sometimes faster.
+              </p>
+            </div>
+          </div>
+
+          <div className="md:col-span-7">
+            <span className="editorial-eyebrow">Write to the editor</span>
+            <h1 className="display-serif mt-4" style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}>
+              Send us a note. <em style={{ color: "#F25C54" }}>We read everything.</em>
+            </h1>
+            <p className="mt-5 text-lg" style={{ color: "rgba(31,20,34,0.72)", lineHeight: 1.65 }}>
+              Pitches, corrections, the essay you wish someone would write , the inbox is a real one.
+            </p>
+
+            <form onSubmit={submit} className="mt-10 space-y-5">
+              <div>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "#2A0F33", letterSpacing: "0.02em" }}>Your name</label>
+                <input
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border transition-colors focus:outline-none focus:border-[#F25C54]"
+                  style={inputStyle}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "#2A0F33", letterSpacing: "0.02em" }}>Your email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border focus:outline-none focus:border-[#F25C54]"
+                  style={inputStyle}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "#2A0F33", letterSpacing: "0.02em" }}>Message</label>
+                <textarea
+                  value={message}
+                  onChange={e => setMessage(e.target.value)}
+                  required
+                  rows={7}
+                  className="w-full px-4 py-3 rounded-xl border focus:outline-none focus:border-[#F25C54]"
+                  style={{ ...inputStyle, lineHeight: 1.6 }}
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="btn-primary disabled:opacity-60"
+              >
+                {status === "sending" ? <><Loader2 className="animate-spin" size={16} /> Sending…</>
+                  : status === "ok" ? <><Check size={16} /> Sent , thank you</>
+                  : <><Send size={16} /> Send message</>}
+              </button>
+              {status === "ok" && (
+                <p className="text-sm font-medium" style={{ color: "#1AA39A" }}>
+                  Thank you. We'll be in touch.
+                </p>
+              )}
+              {status === "err" && (
+                <p className="text-sm font-medium" style={{ color: "#F25C54" }}>{errMsg}</p>
+              )}
+            </form>
+          </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: "#2B2B2B" }}>Your email</label>
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} required className="w-full px-4 py-2.5 rounded-xl border" style={{ borderColor: "rgba(43,43,43,0.15)", background: "#FFFEF9" }} />
-        </div>
-        <div>
-          <label className="block text-sm font-medium mb-1" style={{ color: "#2B2B2B" }}>Message</label>
-          <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={6} className="w-full px-4 py-2.5 rounded-xl border" style={{ borderColor: "rgba(43,43,43,0.15)", background: "#FFFEF9" }} />
-        </div>
-        <button type="submit" disabled={status === "sending"} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold" style={{ background: "#E8604C", color: "#FFFEF9" }}>
-          {status === "sending" ? <><Loader2 className="animate-spin" size={16} /> Sending…</> : status === "ok" ? <><Check size={16} /> Sent</> : <><Send size={16} /> Send message</>}
-        </button>
-        {status === "ok" && <p className="text-sm" style={{ color: "#2AA5A0" }}>Thank you. We'll be in touch.</p>}
-        {status === "err" && <p className="text-sm" style={{ color: "#E8604C" }}>{errMsg}</p>}
-      </form>
+      </section>
     </div>
   );
 }

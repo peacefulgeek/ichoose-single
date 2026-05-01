@@ -1,0 +1,41 @@
+{
+  "site": {
+    "home_hero":     { "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/site_home_hero-SuHUiyZbME8MXLjBCm2ieR.webp" },
+    "about_portrait":{ "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/site_about_portrait-9oADrbWjVqyRAxBMNpCyzR.webp" },
+    "assessments":   { "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/site_assessments_hero-PJAaptUVfp5JasKyrRMJtz.webp" },
+    "apothecary":    { "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/site_apothecary_hero-MbgTPqmHpMU9VpSXcrXmsX.webp" },
+    "contact":       { "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/site_contact_hero-LV4kF2uxMxsdW94Pb4jHrM.webp" }
+  },
+  "articles": [
+    { "slug": "the-single-womans-field-guide-to-saying-no-without-a-sorry",        "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_01-K79yd29aKd3fZF4E8ZoDmA.webp" },
+    { "slug": "dating-on-your-own-terms-after-a-decade-of-performing",            "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_02-fAF2rKTWKQhvtDexzsqwsm.webp" },
+    { "slug": "the-quiet-power-of-choosing-yourself-first",                       "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_03-fTbrh8CtdFw5dPzViPVsqC.webp" },
+    { "slug": "why-solo-sundays-became-my-most-sacred-day-of-the-week",           "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_04-TwCWV86zHsfrWi4QNS5uky.webp" },
+    { "slug": "stepping-off-the-relationship-escalator-without-apologizing",      "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_05-7m3upSdgVx33e8rLmWXz3j.webp" },
+    { "slug": "the-single-persons-guide-to-cooking-for-one-without-the-pity",     "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_06-o2fEFUQzufByyTLS3oFRWf.webp" },
+    { "slug": "how-a-single-woman-redesigns-her-apartment-to-feel-like-a-sanctuary","webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_07-GDkJHsBJeRodr8XBgf2MrK.webp" },
+    { "slug": "what-friendship-becomes-when-you-stop-treating-it-like-a-backup-plan","webp":"https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_08-iGM694k7g7MaLDeHt5BN8Y.webp" },
+    { "slug": "the-art-of-solo-travel-for-people-who-used-to-wait-for-a-plus-one", "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_09-bHTKqpgvTXirQdyHXWC7Ks.webp" },
+    { "slug": "solo-finance-rituals-that-dont-require-a-spouse-to-plan-with",     "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_10-U5YKhivfRUcfY38DzqPfmL.webp" },
+    { "slug": "single-parents-who-stopped-waiting-for-the-cavalry",               "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_11-STwExA5SVMV4TyGwLH98Av.webp" },
+    { "slug": "the-single-mans-quiet-revolution-at-forty",                        "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_12-A8MR74Jx4aWv8y2rB5HhyS.webp" },
+    { "slug": "why-i-stopped-calling-myself-lonely-and-started-calling-it-spacious","webp":"https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_13-LmF8i2PpnoPL263aGr85K8.webp" },
+    { "slug": "morning-rituals-that-make-a-studio-apartment-feel-like-a-home",    "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_14-my4capCn5ixtKNgeoWYcGM.webp" },
+    { "slug": "the-truth-about-self-partnering-no-one-posted-on-instagram",       "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_15-2UbiWDeee2FsDjR9Lv3H4m.webp" },
+    { "slug": "building-a-solo-travel-habit-on-a-real-person-budget",             "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_16-QmciAiuZqoWax3TYGbLu3s.webp" },
+    { "slug": "what-happens-to-your-calendar-when-you-take-your-single-life-seriously","webp":"https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_17-amqrps44ayVSWJjZLqxr7Q.webp" },
+    { "slug": "solo-cooking-without-the-diet-culture-voice-in-your-head",         "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_18-5PuFbNzFHcLBvKXxoQ63GP.webp" },
+    { "slug": "why-the-holidays-hit-different-when-youre-single-by-design",       "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_19-5bRYsciE9VbW4wfiN9QJBR.webp" },
+    { "slug": "the-quiet-math-of-solo-homeownership-in-your-thirties",            "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_20-am23mbF8HcGGETdTL2heFQ.webp" },
+    { "slug": "conscious-uncoupling-for-people-who-wont-be-marrying-again",       "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_21-ihzpKf4PA8Y4PLLrCNH5QF.webp" },
+    { "slug": "single-by-design-at-fifty-the-decade-that-surprised-me",           "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_22-7EGBawjVupyk8y593vrZaq.webp" },
+    { "slug": "why-a-cast-iron-skillet-became-my-most-romantic-possession",       "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_23-66K2SbLK4GUBuyBY2r9tTi.webp" },
+    { "slug": "what-i-tell-my-married-friends-when-they-ask-if-im-lonely",        "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_24-muDDozyMjuJHr6NLzjosdR.webp" },
+    { "slug": "why-i-started-reading-books-like-my-future-depended-on-it",        "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_25-Vduycf8uUPJQtp2JyUeX3d.webp" },
+    { "slug": "the-single-persons-permission-slip-for-an-ordinary-tuesday",       "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_26-8L88mLrhe3R4sNPRzXYLNf.webp" },
+    { "slug": "what-a-year-of-solo-sundays-taught-me-about-being-loved",          "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_27-C7rMcwqJEQmtZLVoYAmFKZ.webp" },
+    { "slug": "how-to-throw-yourself-a-birthday-dinner-when-youre-single-by-design","webp":"https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_28-cGvoMnQkHsMtGzxMfJhEyR.webp" },
+    { "slug": "the-single-womans-case-for-building-wealth-on-her-own-terms",      "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_29-ePNiYCVmxFbU4zAYKrrTpc.webp" },
+    { "slug": "sleeping-alone-on-purpose-and-liking-it-most-nights",              "webp": "https://d2xsxph8kpxj0f.cloudfront.net/310519663309220512/2TDyPekTKM8ft57VA2A9rx/hero_30-mLm5xsp9cCNY9ZvhRWfuTS.webp" }
+  ]
+}

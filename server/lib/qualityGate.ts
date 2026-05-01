@@ -131,7 +131,7 @@ export interface GateResult {
   };
 }
 
-const AUTHORITATIVE_DOMAIN = /(?:^|\/\/|\.)(nih\.gov|cdc\.gov|who\.int|nature\.com|sciencedirect\.com|pubmed\.ncbi\.nlm\.nih\.gov|\.edu|\.gov|psychologytoday\.com|harvard\.edu|stanford\.edu|jamanetwork\.com|nejm\.org|apa\.org|pewresearch\.org|brookings\.edu|kff\.org|mayoclinic\.org)/i;
+const AUTHORITATIVE_DOMAIN = /(?:^|\/\/|\.)(nih\.gov|cdc\.gov|who\.int|nature\.com|sciencedirect\.com|pubmed\.ncbi\.nlm\.nih\.gov|\.edu|\.gov|psychologytoday\.com|harvard\.edu|stanford\.edu|jamanetwork\.com|nejm\.org|apa\.org|pewresearch\.org|brookings\.edu|kff\.org|mayoclinic\.org|hbr\.org)/i;
 const AMAZON_LINK = /https:\/\/www\.amazon\.com\/dp\/([A-Z0-9]{10})/g;
 const INTERNAL_HREF = /href=["']\/(articles|about|disclosures|privacy|contact|author)/g;
 const ANCHOR_HREF = /href=["']([^"']+)["']/g;
