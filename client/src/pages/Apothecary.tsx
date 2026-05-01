@@ -36,7 +36,7 @@ export default function Apothecary() {
       <section className="section-coral" style={{ background: "linear-gradient(180deg, #FBF7EE 0%, #FBF7EE 100%)" }}>
         <div className="container py-16 md:py-24 grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-5 hero-photo grain" style={{ aspectRatio: "4 / 5", borderRadius: "1.5rem", overflow: "hidden", boxShadow: "0 30px 60px -20px rgba(74,25,66,0.35)" }}>
-            <img src={APO_HERO} alt="A lush flat-lay of single-person apothecary supplies , herbs, teas, books, a lit candle" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src={APO_HERO} alt="A lush flat-lay of single-person apothecary supplies: herbs, teas, books, a lit candle" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div className="md:col-span-7">
             <span className="editorial-eyebrow">The Apothecary</span>

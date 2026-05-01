@@ -87,7 +87,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             </div>
           </div>
           <div className="mt-10 pt-6 text-xs" style={{ borderTop: "1px solid rgba(251,247,238,0.14)", color: "rgba(251,247,238,0.62)" }}>
-            © {new Date().getFullYear()} I Choose Single , every essay reviewed by The Oracle Lover.
+            © {new Date().getFullYear()} I Choose Single · Every essay reviewed by The Oracle Lover.
             We participate in the Amazon Associates program; product links may earn a small commission.
           </div>
         </div>

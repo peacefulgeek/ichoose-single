@@ -24,15 +24,15 @@ export default function Home() {
         <div className="container relative py-20 md:py-28 grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-7">
             <span className="editorial-eyebrow" style={{ color: "#F2B33D" }}>
-              Issue 01 , Solo, on purpose
+              Issue 01 · Solo, on purpose
             </span>
             <h1 className="mt-5 display-serif">
               Choose your <span className="coral">own life,</span><br />
               <em>on purpose.</em>
             </h1>
             <p className="mt-6 text-lg" style={{ maxWidth: "34rem" }}>
-              Vibrant, image-rich essays on intentional singlehood, solo living, and self-partnering ,
-              for anyone who's done waiting for a plus-one to start their real life.
+              Vibrant, image-rich essays on intentional singlehood, solo living, and self-partnering. For
+              anyone who's done waiting for a plus-one to start their real life.
               Every piece reviewed by The Oracle Lover.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -88,7 +88,7 @@ export default function Home() {
 
         {featured && (
           <div className="mag-grid">
-            {/* hero feature , large */}
+            {/* hero feature, large */}
             <div className="span-4 row-2">
               <ArticleCard a={featured} index={0} size="wide" />
             </div>
@@ -115,7 +115,7 @@ export default function Home() {
         )}
       </section>
 
-      {/* ============== TEAL BAND , assessments CTA ============== */}
+      {/* ============== TEAL BAND, assessments CTA ============== */}
       <section className="section-teal">
         <div className="container py-16 md:py-20 grid md:grid-cols-2 gap-10 items-center">
           <div>
@@ -139,7 +139,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============== MID GRID , more essays ============== */}
+      {/* ============== MID GRID, more essays ============== */}
       {grid.length > 0 && (
         <section className="container py-16 md:py-20">
           <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
@@ -169,11 +169,11 @@ export default function Home() {
         </section>
       )}
 
-      {/* ============== APOTHECARY CTA , gold band ============== */}
+      {/* ============== APOTHECARY CTA, gold band ============== */}
       <section className="section-gold-band">
         <div className="container py-16 md:py-20 grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-5 hero-photo grain" style={{ aspectRatio: "4 / 5", borderRadius: "1.5rem", overflow: "hidden", boxShadow: "0 30px 60px -20px rgba(74,25,66,0.35)" }}>
-            <img src={APO_HERO} alt="A lush flat-lay of single-person apothecary supplies , herbs, teas, books, a candle" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src={APO_HERO} alt="A lush flat-lay of single-person apothecary supplies: herbs, teas, books, a candle" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
           <div className="md:col-span-7">
             <span className="editorial-eyebrow" style={{ color: "#4A1942" }}>The Apothecary</span>
@@ -181,7 +181,7 @@ export default function Home() {
               The supplies for a single life worth living.
             </h2>
             <p className="mt-5" style={{ color: "#2A0F33", lineHeight: 1.65, fontSize: "1.05rem" }}>
-              Curated supplements, herbs, books, and small rituals , every recommendation reviewed and explained.
+              Curated supplements, herbs, books, and small rituals. Every recommendation reviewed and explained.
               Built for one person who knows what their nervous system needs.
             </p>
             <div className="mt-7">

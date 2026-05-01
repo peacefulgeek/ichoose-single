@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   I Choose Single , vibrant editorial palette (round 4)
+   I Choose Single, vibrant editorial palette (round 4)
    plum #2A0F33, deep wine #4A1942, electric coral #F25C54,
    lush teal #1AA39A, sun gold #F2B33D, rose blush #F4B0B0,
    ivory cream #FBF7EE, ink charcoal #1F1422
@@ -52,7 +52,7 @@
 
 :root {
   --radius: 1rem;
-  /* warm ivory canvas with plum text , magazine warmth, not corporate */
+  /* warm ivory canvas with plum text, magazine warmth, not corporate */
   --background: oklch(0.972 0.018 88);    /* #FBF7EE */
   --foreground: oklch(0.215 0.045 320);   /* #1F1422 ink-plum */
   --card: oklch(1 0 0);
@@ -303,7 +303,7 @@
     text-shadow: 0 1px 14px rgba(0,0,0,0.55);
   }
 
-  /* feature card variant , colored block instead of photo */
+  /* feature card variant, colored block instead of photo */
   .ed-card.color-coral { background: var(--color-coral); color: var(--color-ivory); }
   .ed-card.color-coral h3, .ed-card.color-coral .ed-cat, .ed-card.color-coral p { color: var(--color-ivory); }
   .ed-card.color-teal { background: var(--color-teal); color: var(--color-ivory); }
@@ -507,6 +507,19 @@
   .mobile-tabs a.active {
     color: var(--color-coral);
     font-weight: 600;
+    position: relative;
+  }
+  .mobile-tabs a.active::after {
+    content: "";
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 3px;
+    background: var(--color-gold);
+    border-radius: 99px;
+    box-shadow: 0 0 12px rgba(242,179,61,0.55);
   }
   .mobile-tabs a svg { width: 22px; height: 22px; }
 

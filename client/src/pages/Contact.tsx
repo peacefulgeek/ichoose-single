@@ -64,7 +64,7 @@ export default function Contact() {
               Send us a note. <em style={{ color: "#F25C54" }}>We read everything.</em>
             </h1>
             <p className="mt-5 text-lg" style={{ color: "rgba(31,20,34,0.72)", lineHeight: 1.65 }}>
-              Pitches, corrections, the essay you wish someone would write , the inbox is a real one.
+              Pitches, corrections, the essay you wish someone would write. The inbox is a real one.
             </p>
 
             <form onSubmit={submit} className="mt-10 space-y-5">
@@ -106,7 +106,7 @@ export default function Contact() {
                 className="btn-primary disabled:opacity-60"
               >
                 {status === "sending" ? <><Loader2 className="animate-spin" size={16} /> Sending…</>
-                  : status === "ok" ? <><Check size={16} /> Sent , thank you</>
+                  : status === "ok" ? <><Check size={16} /> Sent. Thank you.</>
                   : <><Send size={16} /> Send message</>}
               </button>
               {status === "ok" && (

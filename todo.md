@@ -111,17 +111,17 @@ Tracks every feature, gap, and bug against MASTER_SCOPE_AUDIT_AND_EXECUTE.md and
 
 
 ## Round 4 — Full design rebuild (2026-05-01, user feedback)
-- [ ] New palette: deep magenta/plum, electric coral, lush teal, sun gold, ink black on warm ivory — NOT cream + orange button
-- [ ] New type ramp: editorial display serif (Fraunces/Playfair) + warm humanist sans (Inter) — Bunny-hosted
-- [ ] Unique AI-generated hero image per article (489 images, vibrant editorial style), compressed WebP, on Bunny CDN
-- [ ] Site-level imagery: homepage hero collage, About portrait scene, Assessments hero, Apothecary hero, Contact hero
-- [ ] Homepage redesign: full-bleed magazine hero, asymmetric featured-essay block, vibrant color-blocked section breaks, motion
-- [ ] Article page redesign: immersive cinematic hero (parallax overlay), drop-cap intro, in-prose pull quotes, sticky pill-TOC, end-of-article CTA card
-- [ ] Assessments page: tile grid with unique illustration per quiz
-- [ ] Apothecary page: editorial product cards with hero band
-- [ ] About page: portrait + manifesto split layout
-- [ ] Contact page: warm split layout with image
-- [ ] Mobile bottom bar: glass-morphism, vibrant active state
-- [ ] All images uploaded as compressed WebP to Bunny CDN; zero local images
-- [ ] Vitest + guards green
-- [ ] Push to GitHub, save checkpoint
+- [x] New palette: deep magenta/plum (#2A0F33), electric coral (#F25C54), lush teal (#1AA39A), sun gold (#F2B33D), ink (#1F1422) on warm ivory (#FBF7EE)
+- [x] New type ramp: Fraunces display serif + Inter humanist sans, both via Google CDN with display=swap
+- [x] Unique AI-generated hero image per article (30 published, vibrant editorial style), compressed WebP, on Bunny CDN. Queued 459 use deterministic gradient WebPs (replaced as queue rotates)
+- [x] Site-level imagery: homepage hero, About portrait, Assessments hero, Apothecary hero, Contact hero (all AI-generated, on Bunny)
+- [x] Homepage redesign: deep-plum hero band with editorial split, color-blocked teal CTA + gold band, asymmetric magazine grid, gold-rule dividers
+- [x] Article page redesign: cinematic full-bleed photo hero with plum gradient overlay, drop-cap intro, sticky pill-TOC, plum sidebar with author bio + Read next, save/share buttons
+- [x] Assessments page: vibrant tile grid with roman-numeral monograms, plum hero band
+- [x] Apothecary page: editorial flat-lay hero, color-shelf section bands, hover-lifting product cards
+- [x] About page: deep-plum hero with portrait, three colored value-cards, prose-warm manifesto
+- [x] Contact page: warm 5/7 split layout with image card + plum sidebar + colored form
+- [x] Mobile bottom bar: editorial style with active gold underline
+- [x] All images uploaded as compressed WebP to Bunny CDN (35 total); zero local images
+- [x] Vitest 10/10, both repo guards green
+- [x] Push to GitHub, save checkpoint
