@@ -1,5 +1,5 @@
 /**
- * Topic bank for Single by Design. Behavioral, specific, story-rich angles.
+ * Topic bank for I Choose Single. Behavioral, specific, story-rich angles.
  * The cron rotates through these; duplicates are avoided by slug.
  */
 export interface Topic {
@@ -27,10 +27,10 @@ export const TOPIC_BANK: Topic[] = [
   { title: "What Happens to Your Calendar When You Take Your Single Life Seriously", category: "intentional-singlehood", tags: ["intentional-singlehood", "boundaries", "single-women"] },
   { title: "The Single Woman's Field Guide to Saying No Without a Sorry", category: "single-women", tags: ["single-women", "boundaries", "self-partnering"] },
   { title: "Solo Cooking Without the Diet-Culture Voice in Your Head", category: "solo-living", tags: ["solo-living", "single-cooking", "self-care"] },
-  { title: "Why the Holidays Hit Different When You're Single by Design", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-women", "single-men", "holidays"] },
+  { title: "Why the Holidays Hit Different When You're I Choose Single", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-women", "single-men", "holidays"] },
   { title: "The Quiet Math of Solo Homeownership in Your Thirties", category: "solo-finance", tags: ["solo-finance", "solo-living", "single-women"] },
   { title: "Conscious Uncoupling for People Who Won't Be Marrying Again", category: "relationship-escalator", tags: ["relationship-escalator", "divorce", "self-partnering"] },
-  { title: "Single by Design at Fifty: The Decade That Surprised Me", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-women", "self-partnering"] },
+  { title: "I Choose Single at Fifty: The Decade That Surprised Me", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-women", "self-partnering"] },
   { title: "Why a Cast Iron Skillet Became My Most Romantic Possession", category: "solo-living", tags: ["solo-living", "single-cooking", "self-care", "single-living"] },
   { title: "What I Tell My Married Friends When They Ask If I'm Lonely", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-women", "friendship"] },
   { title: "The Ritual Slowness of a Solo Saturday Morning", category: "solo-living", tags: ["solo-living", "morning-rituals", "self-care"] },
@@ -39,7 +39,7 @@ export const TOPIC_BANK: Topic[] = [
   { title: "Why I Started Reading Books Like My Future Depended On It", category: "self-partnering", tags: ["self-partnering", "books", "single-women", "single-men"] },
   { title: "The Single Person's Permission Slip for an Ordinary Tuesday", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-living", "self-care"] },
   { title: "What a Year of Solo Sundays Taught Me About Being Loved", category: "self-partnering", tags: ["self-partnering", "single-women", "morning-rituals"] },
-  { title: "How to Throw Yourself a Birthday Dinner When You're Single by Design", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-living", "self-care"] },
+  { title: "How to Throw Yourself a Birthday Dinner When You're I Choose Single", category: "intentional-singlehood", tags: ["intentional-singlehood", "single-living", "self-care"] },
   { title: "The Single Woman's Case for Building Wealth on Her Own Terms", category: "solo-finance", tags: ["solo-finance", "single-women", "intentional-singlehood"] },
   { title: "Sleeping Alone, On Purpose, and Liking It Most Nights", category: "solo-living", tags: ["solo-living", "self-care", "intentional-singlehood"] },
   { title: "Why Single Men in Their Fifties Are Quietly Reinventing Their Lives", category: "single-men", tags: ["single-men", "intentional-singlehood", "self-partnering"] },

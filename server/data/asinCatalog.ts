@@ -1,5 +1,5 @@
 /**
- * Per-niche ASIN catalog for Single by Design. These are well-known, long-running
+ * Per-niche ASIN catalog for I Choose Single. These are well-known, long-running
  * products in the solo-living / self-care / single-life space. The ASIN health
  * cron (§10F) verifies each one is still live; broken ones get marked and swapped.
  */

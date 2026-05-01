@@ -14,6 +14,9 @@ import Contact from "./pages/Contact";
 import Author from "./pages/Author";
 import Search from "./pages/Search";
 import Saved from "./pages/Saved";
+import Assessments from "./pages/Assessments";
+import AssessmentDetail from "./pages/AssessmentDetail";
+import Apothecary from "./pages/Apothecary";
 import SiteShell from "./components/SiteShell";
 
 function Router() {
@@ -30,6 +33,9 @@ function Router() {
         <Route path={"/author/the-oracle-lover"} component={Author} />
         <Route path={"/search"} component={Search} />
         <Route path={"/saved"} component={Saved} />
+        <Route path={"/assessments"} component={Assessments} />
+        <Route path={"/assessments/:slug"} component={AssessmentDetail} />
+        <Route path={"/apothecary"} component={Apothecary} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />
       </Switch>

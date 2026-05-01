@@ -4,7 +4,7 @@ export default function Privacy() {
       <h1 className="text-3xl md:text-5xl font-extrabold" style={{ color: "#2B2B2B" }}>Privacy policy</h1>
       <div className="prose-warm mt-6">
         <p>
-          Single by Design respects your privacy. We collect the minimum amount of data needed to serve essays and improve them over time.
+          I Choose Single respects your privacy. We collect the minimum amount of data needed to serve essays and improve them over time.
         </p>
         <h2>What we collect</h2>
         <ul>

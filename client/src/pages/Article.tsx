@@ -152,7 +152,7 @@ export default function Article() {
                 <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#2AA5A0" }}>About the author</div>
                 <div className="font-semibold text-lg" style={{ color: "#2B2B2B" }}>The Oracle Lover</div>
                 <p className="mt-2 text-sm" style={{ color: "#6B6B66" }}>
-                  Editor and reviewer at Single by Design. Writes essays on intentional singlehood and self-partnering, and reviews every product link before it ships.
+                  Editor and reviewer at I Choose Single. Writes essays on intentional singlehood and self-partnering, and reviews every product link before it ships.
                 </p>
                 <Link href="/author/the-oracle-lover" className="inline-block mt-3 text-sm font-semibold" style={{ color: "#E8604C" }}>Read more from this author →</Link>
               </div>
@@ -173,7 +173,7 @@ export default function Article() {
               <div className="p-5 rounded-2xl" style={{ background: "#FFFEF9", border: "1px solid rgba(43,43,43,0.10)" }}>
                 <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#2AA5A0" }}>Affiliate disclosure</div>
                 <p className="text-sm" style={{ color: "#6B6B66" }}>
-                  Single by Design is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate we earn from qualifying purchases. <Link href="/disclosures" style={{ color: "#E8604C" }}>Read the full disclosure</Link>.
+                  I Choose Single is a participant in the Amazon Services LLC Associates Program. As an Amazon Associate we earn from qualifying purchases. <Link href="/disclosures" style={{ color: "#E8604C" }}>Read the full disclosure</Link>.
                 </p>
               </div>
             </div>

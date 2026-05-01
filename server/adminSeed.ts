@@ -1,5 +1,5 @@
 /**
- * Admin seed and maintenance routes for Single by Design.
+ * Admin seed and maintenance routes for I Choose Single.
  *
  * POST /api/admin/seed
  *   Idempotent. Ensures the corpus has exactly 30 PUBLISHED articles spread
@@ -111,7 +111,7 @@ export function registerAdminSeed(app: Express) {
 
     // 3) Always backfill any missing heroUrls
     await conn.execute(
-      `UPDATE articles SET heroUrl = CONCAT('https://fertile-ground.b-cdn.net/sites/single-by-design/heroes/', slug, '.webp') WHERE heroUrl IS NULL OR heroUrl = ''`,
+      `UPDATE articles SET heroUrl = CONCAT('https://ichoose-single.b-cdn.net/heroes/', slug, '.webp')`,
     );
 
     const [final] = await conn.query("SELECT status, COUNT(*) AS c, COUNT(DISTINCT DATE(publishedAt)) AS days FROM articles GROUP BY status");
@@ -162,7 +162,7 @@ export function registerAdminSeed(app: Express) {
     if (!url) return res.status(500).json({ error: "no DATABASE_URL" });
     const conn = await mysql.createConnection({ uri: url });
     await conn.execute(
-      `UPDATE articles SET heroUrl = CONCAT('https://fertile-ground.b-cdn.net/sites/single-by-design/heroes/', slug, '.webp')`,
+      `UPDATE articles SET heroUrl = CONCAT('https://ichoose-single.b-cdn.net/heroes/', slug, '.webp')`,
     );
     const [rows] = await conn.query("SELECT COUNT(*) AS c FROM articles WHERE heroUrl IS NOT NULL AND heroUrl <> ''");
     await conn.end();

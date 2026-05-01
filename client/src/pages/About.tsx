@@ -3,10 +3,10 @@ import { Link } from "wouter";
 export default function About() {
   return (
     <div className="container py-12 max-w-3xl">
-      <h1 className="text-3xl md:text-5xl font-extrabold" style={{ color: "#2B2B2B" }}>About Single by Design</h1>
+      <h1 className="text-3xl md:text-5xl font-extrabold" style={{ color: "#2B2B2B" }}>About I Choose Single</h1>
       <div className="prose-warm mt-6">
         <p>
-          Single by Design is a magazine of warm, quietly opinionated essays for people who are choosing single life on purpose.
+          I Choose Single is a magazine of warm, quietly opinionated essays for people who are choosing single life on purpose.
           We don't think of singlehood as a holding pattern. We treat it as a real shape of a life: a daily practice with rituals,
           finances, friendships, and creative time of its own.
         </p>

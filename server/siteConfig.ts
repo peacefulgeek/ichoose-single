@@ -1,15 +1,15 @@
 /**
- * Single by Design — site-wide constants.
+ * I Choose Single — site-wide constants.
  * Source of truth for apex host, author identity, affiliate config, Bunny CDN.
  *
  * Per master scope §2: per-site config is centralized here, not scattered.
  */
 
-// Per-site scope #88: canonical apex is singlebydesign.life. Override only via
+// Per-site scope #88: canonical apex is ichoosesingle.com. Override only via
 // SITE_APEX_HOST in production env (e.g., to test against a staging domain).
-export const SITE_APEX = process.env.SITE_APEX_HOST || "singlebydesign.life";
+export const SITE_APEX = process.env.SITE_APEX_HOST || "ichoosesingle.com";
 export const SITE_URL = `https://${SITE_APEX}`;
-export const SITE_NAME = "Single by Design";
+export const SITE_NAME = "I Choose Single";
 export const SITE_DESCRIPTION =
   "Intentional singlehood, solo living as conscious choice, and the art of self-partnering. Warm, image-rich essays on choosing your own life.";
 
@@ -32,13 +32,15 @@ export const AMAZON_TAG = "spankyspinola-20" as const;
 export const DEEPSEEK_BASE_URL = "https://api.deepseek.com" as const;
 export const DEEPSEEK_MODEL = process.env.OPENAI_MODEL || "deepseek-v4-pro";
 
-// Bunny CDN — fertile-ground zone, per master scope §9.
-// Hero images for THIS site live under /sites/single-by-design/heroes/<slug>.webp.
-// Fonts live under /fonts/manrope.css. The CDN is the single source of truth
-// for any image asset; nothing image-shaped is allowed in the repo.
-export const BUNNY_PULL_ZONE = "https://fertile-ground.b-cdn.net";
-export const BUNNY_SITE_PATH = "sites/single-by-design";
-export const BUNNY_HEROES_BASE = `${BUNNY_PULL_ZONE}/${BUNNY_SITE_PATH}/heroes`;
+// Bunny CDN — ichoose-single zone (storage zone name = pull zone name).
+// Hero images for THIS site live under /heroes/<slug>.webp at the root of
+// the storage zone. Fonts live under /fonts/manrope.css. The CDN is the
+// single source of truth for any image asset; nothing image-shaped is
+// allowed in the repo.
+export const BUNNY_PULL_ZONE = "https://ichoose-single.b-cdn.net";
+export const BUNNY_STORAGE_ZONE = "ichoose-single" as const;
+export const BUNNY_STORAGE_HOST = "https://ny.storage.bunnycdn.com" as const;
+export const BUNNY_HEROES_BASE = `${BUNNY_PULL_ZONE}/heroes`;
 export const BUNNY_FONT_FAMILY = "Manrope";
 export const BUNNY_FONT_CSS_URL = `${BUNNY_PULL_ZONE}/fonts/manrope.css`;
 
@@ -52,7 +54,7 @@ export function heroUrlForSlug(slug: string): string {
   return `${BUNNY_HEROES_BASE}/${slug}.webp`;
 }
 
-// Categories specific to Single by Design
+// Categories specific to I Choose Single
 export const SITE_CATEGORIES = [
   "intentional-singlehood",
   "solo-living",
@@ -71,8 +73,10 @@ export type SiteCategory = (typeof SITE_CATEGORIES)[number];
 // Internal hub pages — used by sitemap / llms / nav
 export const SITE_HUB_PAGES = [
   { path: "/", title: SITE_NAME, description: SITE_DESCRIPTION },
-  { path: "/articles", title: "All articles", description: "Every essay on Single by Design, by category." },
-  { path: "/about", title: "About Single by Design", description: "Who we are and why this site exists." },
+  { path: "/articles", title: "All articles", description: "Every essay on I Choose Single, by category." },
+  { path: "/assessments", title: "Self-assessments", description: "Eleven gentle quizzes for the designed solo life." },
+  { path: "/apothecary", title: "The Apothecary", description: "A curated shelf of supplements, herbs, and TCM classics." },
+  { path: "/about", title: "About I Choose Single", description: "Who we are and why this site exists." },
   { path: "/disclosures", title: "Affiliate disclosures", description: "How we earn and how we link." },
   { path: "/privacy", title: "Privacy policy", description: "What we collect, what we don't." },
   { path: "/contact", title: "Contact", description: "How to reach the editor." },

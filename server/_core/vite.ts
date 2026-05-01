@@ -7,7 +7,7 @@ import { createServer as createViteServer, type ViteDevServer } from "vite";
 import viteConfig from "../../vite.config";
 import { registerSsrRoutes } from "../ssrHead";
 
-const APEX_HOST = process.env.SITE_APEX_HOST || "singlebydesign.life";
+const APEX_HOST = process.env.SITE_APEX_HOST || "ichoosesingle.com";
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {

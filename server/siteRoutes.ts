@@ -103,7 +103,7 @@ export function registerSiteRoutes(app: Express) {
       const re2 = /<a[^>]*href=\"(https?:\/\/[^\"]+)\"[^>]*>([\s\S]*?)<\/a>/gi;
       let m2: RegExpExecArray | null;
       while ((m2 = re2.exec(a.body || ""))) {
-        if (m2[1].includes("amazon.com") || m2[1].includes("singlebydesign")) continue;
+        if (m2[1].includes("amazon.com") || m2[1].includes("ichoosesingle")) continue;
         if (!externalSet.has(m2[1])) externalSet.set(m2[1], m2[2].replace(/<[^>]+>/g, "").trim());
       }
       const externalLinks = Array.from(externalSet.entries()).slice(0, 8).map(([url, anchor]) => ({ url, anchor }));

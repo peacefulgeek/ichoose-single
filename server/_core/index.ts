@@ -13,6 +13,9 @@ import { registerBootstrapMigration } from "./bootstrapMigration";
 import { registerSiteRoutes } from "../siteRoutes";
 import { startCronJobs } from "../cron/scheduler";
 import { registerAdminSeed } from "../adminSeed";
+import { registerAssessmentsRoutes } from "../assessmentsRoutes";
+import { registerApothecaryRoutes } from "../apothecaryRoutes";
+import { registerContactRoute } from "../contactRoute";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -33,7 +36,7 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
   throw new Error(`No available port found starting from ${startPort}`);
 }
 
-const APEX_HOST = process.env.SITE_APEX_HOST || "singlebydesign.life";
+const APEX_HOST = process.env.SITE_APEX_HOST || "ichoosesingle.com";
 
 async function startServer() {
   const app = express();
@@ -78,6 +81,9 @@ async function startServer() {
   registerSiteRoutes(app);
   registerBootstrapMigration(app);
   registerAdminSeed(app);
+  registerAssessmentsRoutes(app);
+  registerApothecaryRoutes(app);
+  registerContactRoute(app);
   registerStorageProxy(app);
   registerOAuthRoutes(app);
 

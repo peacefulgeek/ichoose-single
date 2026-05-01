@@ -17,7 +17,7 @@ export default function Author() {
             The Oracle Lover
           </h1>
           <p className="mt-3 text-lg max-w-2xl" style={{ color: "#6B6B66" }}>
-            Editor and reviewer at Single by Design. Reviews and writes warm, opinionated essays on intentional singlehood,
+            Editor and reviewer at I Choose Single. Reviews and writes warm, opinionated essays on intentional singlehood,
             self-partnering, and solo living. Every essay on this site has passed through her hands.
           </p>
           <div className="mt-5 grid sm:grid-cols-3 gap-4 max-w-3xl">

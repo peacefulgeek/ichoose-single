@@ -145,6 +145,30 @@ async function resolveHead(apex: string, urlPath: string): Promise<HeadData> {
     }
   }
 
+  // Assessment detail page (/assessments/:slug) -> Quiz schema
+  const assessmentMatch = cleanPath.match(/^\/assessments\/([a-z0-9\-]+)\/?$/i);
+  if (assessmentMatch) {
+    const slug = assessmentMatch[1];
+    return {
+      title: `Self-assessment | ${SITE_NAME}`,
+      description: `A gentle five-to-seven-minute self-assessment from ${SITE_NAME}, written for the designed solo life.`,
+      canonical,
+      ogImage: null,
+      robots,
+      author,
+      jsonLd: [
+        {
+          "@context": "https://schema.org",
+          "@type": "Quiz",
+          name: slug.replace(/-/g, " "),
+          url: canonical,
+          isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+          author: { "@type": "Person", name: AUTHOR_NAME, url: `${SITE_URL}/author/the-oracle-lover` },
+        },
+      ],
+    };
+  }
+
   // Author page
   if (/^\/author\/the-oracle-lover\/?$/i.test(cleanPath)) {
     return {
@@ -177,6 +201,8 @@ async function resolveHead(apex: string, urlPath: string): Promise<HeadData> {
     "/contact": `Contact | ${SITE_NAME}`,
     "/search": `Search | ${SITE_NAME}`,
     "/saved": `Saved | ${SITE_NAME}`,
+    "/assessments": `Self-assessments | ${SITE_NAME}`,
+    "/apothecary": `The Apothecary | ${SITE_NAME}`,
   };
   const title = hubTitles[cleanPath] || SITE_NAME;
   const description = SITE_DESCRIPTION;
@@ -223,6 +249,8 @@ async function resolveHead(apex: string, urlPath: string): Promise<HeadData> {
     "/search": "SearchResultsPage",
     "/saved": "CollectionPage",
     "/articles": "CollectionPage",
+    "/assessments": "CollectionPage",
+    "/apothecary": "CollectionPage",
   };
   if (staticTypeMap[cleanPath]) {
     jsonLd.push({
@@ -313,7 +341,7 @@ function buildHeadHtml(h: HeadData): string {
 
 function isSsrPath(p: string): boolean {
   if (p === "/") return true;
-  if (/^\/(articles|about|author|disclosures|privacy|contact|search|saved)(\/|$)/i.test(p)) {
+  if (/^\/(articles|assessments|apothecary|about|author|disclosures|privacy|contact|search|saved)(\/|$)/i.test(p)) {
     return true;
   }
   return false;

@@ -36,7 +36,7 @@
 
 :root {
   --radius: 0.85rem;
-  /* Warm light tokens — Single by Design brand */
+  /* Warm light tokens — I Choose Single brand */
   --background: oklch(0.991 0.012 91);   /* #FFFEF9 */
   --foreground: oklch(0.270 0.005 65);   /* #2B2B2B */
   --card: oklch(1 0 0);

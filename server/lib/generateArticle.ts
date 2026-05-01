@@ -94,7 +94,7 @@ function buildPrompt(opts: {
     ? `\nINCLUDE one warm in-prose link to ${AUTHOR_SISTER_SITE} ("The Oracle Lover's home site") with rel="noopener", varied anchor text — natural, not stuffed.`
     : "";
 
-  const system = `You are a senior staff writer for "Single by Design" — a warm, image-rich editorial site about intentional singlehood, solo living as conscious choice, dismantling the relationship escalator, and self-partnering. You write under the byline "${opts.authorName}".
+  const system = `You are a senior staff writer for "I Choose Single" — a warm, image-rich editorial site about intentional singlehood, solo living as conscious choice, dismantling the relationship escalator, and self-partnering. You write under the byline "${opts.authorName}".
 
 Your voice is fierce truth-teller AND tender guide AND irreverent mystic AND devotional closer in the same essay. Conversational, contraction-heavy, fragments for emphasis, concrete specifics over abstractions, direct second-person address.
 
@@ -142,7 +142,7 @@ Body must be 1100-1600 words. Use H2 for major sections (5-8 of them), H3 for su
 
 Tone: warm, fierce, intimate, never preachy. You are writing for someone choosing single life on purpose, not someone resigned to it.`;
 
-  const user = `Write the next "Single by Design" essay.
+  const user = `Write the next "I Choose Single" essay.
 
 Topic: ${opts.topic.title}
 Category: ${opts.topic.category}
@@ -213,7 +213,7 @@ function buildStubArticle(topic: {
 
   const body = `<section data-tldr="ai-overview" aria-label="In short"><p>${tldrText}</p></section>
 
-<p>Honestly, the moment I knew Single by Design needed to be its own essay was a Tuesday afternoon. Quiet apartment. One mug. Enough light through the window to make the whole choice feel like the right one. Right?!</p>
+<p>Honestly, the moment I knew I Choose Single needed to be its own essay was a Tuesday afternoon. Quiet apartment. One mug. Enough light through the window to make the whole choice feel like the right one. Right?!</p>
 
 <p>Here's the thing about ${t.toLowerCase()}. We've been told it's a holding pattern. Something you tolerate until the next chapter starts. ${intLink(0, "On this site we keep returning to a different idea")}: that solo living, chosen with both eyes open, is its own complete life. Not a draft. A finished thing.</p>
 
@@ -297,7 +297,7 @@ function buildStubArticle(topic: {
 
 <h2>The benediction</h2>
 
-<p>You're not broken. You're not waiting. You're not in a holding pattern. You're a person doing one of the bravest things this culture allows: building a life that doesn't need rescue. Does that land? It should. Single by Design exists because so many of us needed this said out loud, and the saying of it changes things.</p>
+<p>You're not broken. You're not waiting. You're not in a holding pattern. You're a person doing one of the bravest things this culture allows: building a life that doesn't need rescue. Does that land? It should. I Choose Single exists because so many of us needed this said out loud, and the saying of it changes things.</p>
 
 <aside class="author-byline" data-eeat="author">
   <p><strong>Reviewed by ${opts.authorName}</strong>, ${opts.authorCredential}. Last updated <time datetime="${today}">${today}</time>.</p>

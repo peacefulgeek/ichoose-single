@@ -4,7 +4,7 @@ export default function Disclosures() {
       <h1 className="text-3xl md:text-5xl font-extrabold" style={{ color: "#2B2B2B" }}>Affiliate disclosures</h1>
       <div className="prose-warm mt-6">
         <p>
-          Single by Design is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed
+          I Choose Single is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed
           to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. Our Amazon associate tag is
           <strong> spankyspinola-20</strong>.
         </p>
@@ -15,7 +15,7 @@ export default function Disclosures() {
         </p>
         <h2>What that means for you</h2>
         <p>
-          When you click an Amazon link on Single by Design and buy something, we may earn a small commission at no extra cost to you.
+          When you click an Amazon link on I Choose Single and buy something, we may earn a small commission at no extra cost to you.
           That commission is what keeps the site running, the essays free, and the editorial calendar honest.
         </p>
         <h2>What it doesn't mean</h2>

@@ -5,7 +5,7 @@ import { heroUrlForSlug, AMAZON_TAG, AUTHOR_NAME, AUTHOR_SISTER_SITE } from "./s
 import { TOPIC_BANK } from "./data/topicBank";
 import { execSync } from "node:child_process";
 
-describe("Single by Design — quality gate", () => {
+describe("I Choose Single — quality gate", () => {
   it("generates an article that passes every quality gate (no DeepSeek)", async () => {
     const topic = TOPIC_BANK[0];
     const { article } = await generateOneArticle({ topicOverride: topic });
@@ -40,12 +40,12 @@ describe("Single by Design — quality gate", () => {
   it("builds a deterministic Bunny CDN hero URL", () => {
     const url = heroUrlForSlug("the-quiet-power-of-choosing-yourself-first");
     expect(url).toBe(
-      "https://fertile-ground.b-cdn.net/sites/single-by-design/heroes/the-quiet-power-of-choosing-yourself-first.webp",
+      "https://ichoose-single.b-cdn.net/heroes/the-quiet-power-of-choosing-yourself-first.webp",
     );
   });
 });
 
-describe("Single by Design — repo hygiene guards", () => {
+describe("I Choose Single — repo hygiene guards", () => {
   it("contains zero images outside favicon.svg", () => {
     // Should exit 0 (no failure) and print the OK line
     const out = execSync("node scripts/check-no-images.mjs", { encoding: "utf8" });

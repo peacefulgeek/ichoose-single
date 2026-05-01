@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Production launcher for Single by Design.
+ * Production launcher for I Choose Single.
  *
  * Per MASTER_SCOPE_AUDIT_AND_EXECUTE.md §11, the cron schedule file MUST live
  * at this path (scripts/start-with-cron.mjs). It boots the compiled Express

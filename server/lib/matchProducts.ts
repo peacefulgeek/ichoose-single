@@ -103,7 +103,7 @@ export async function verifyAsin({
       redirect: "follow",
       signal: ac.signal,
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; SingleByDesignBot/1.0; +https://singlebydesign.life/about)",
+        "User-Agent": "Mozilla/5.0 (compatible; IChooseSingleBot/1.0; +https://ichoosesingle.com/about)",
       },
     });
     clearTimeout(t);

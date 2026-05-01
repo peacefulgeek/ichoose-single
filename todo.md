@@ -1,4 +1,4 @@
-# Single by Design — Project TODO
+# I Choose Single — Project TODO
 
 Tracks every feature, gap, and bug against MASTER_SCOPE_AUDIT_AND_EXECUTE.md and SCOPE-SITE-88-SINGLE-BY-DESIGN.md.
 
@@ -81,3 +81,17 @@ Tracks every feature, gap, and bug against MASTER_SCOPE_AUDIT_AND_EXECUTE.md and
 - [x] Wire hero image into masonry card + article hero band
 - [x] Confirm sitemap, llms-full.txt, and JSON-LD reflect 30 articles
 - [x] Final §23 audit report
+
+## Rebrand round 2 (2026-05-01)
+- [ ] Rebrand site to ichoosesingle.com (apex) — replace ichoosesingle.com everywhere
+- [ ] Update Bunny pull zone to ichoose-single.b-cdn.net everywhere
+- [ ] Generate WebP hero images for all 30 published articles + favicon
+- [ ] Upload all WebP heroes to Bunny storage zone "ichoose-single"
+- [ ] Delete local working images from /home/ubuntu/webdev-static-assets after upload
+- [ ] Add /assessments page with 11 self-assessments + schema markup
+- [ ] Add /apothecary page with ~50 verified ASINs (supplements/herbs/TCM)
+- [ ] Update SITE_URL, APEX_HOST, header brand, llms.txt, JSON-LD across the codebase
+- [ ] Re-run vitest + §1–§22 walk after rebrand
+- [ ] Push project to GitHub peacefulgeek/ichoose-single using GH_PAT
+- [ ] Verify cron schedule active, daily cap enforced, distinct days ≥30
+- [ ] Save checkpoint and emit §23 report block

@@ -5,8 +5,9 @@ import { Home, Search, Bookmark, User } from "lucide-react";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/articles", label: "Articles" },
+  { href: "/assessments", label: "Assessments" },
+  { href: "/apothecary", label: "Apothecary" },
   { href: "/about", label: "About" },
-  { href: "/disclosures", label: "Disclosures" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -19,7 +20,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       <header className="site-header">
         <div className="container flex items-center justify-between py-3">
           <Link href="/" className="brand">
-            Single by Design<span className="dot">.</span>
+            I Choose Single<span className="dot">.</span>
           </Link>
           <nav className="nav hidden md:flex items-center gap-1">
             {NAV.map(item => (
@@ -42,7 +43,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <div className="brand text-lg font-extrabold" style={{ color: "#2B2B2B" }}>
-                Single by Design<span style={{ color: "#E8604C" }}>.</span>
+                I Choose Single<span style={{ color: "#E8604C" }}>.</span>
               </div>
               <p className="mt-2 text-sm" style={{ color: "#6B6B66" }}>
                 Warm essays on intentional singlehood, solo living, and self-partnering.
@@ -52,6 +53,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
               <div className="font-semibold mb-2" style={{ color: "#2B2B2B" }}>Read</div>
               <ul className="space-y-1.5">
                 <li><Link href="/articles" style={{ color: "#6B6B66" }}>All articles</Link></li>
+                <li><Link href="/assessments" style={{ color: "#6B6B66" }}>Self-assessments</Link></li>
+                <li><Link href="/apothecary" style={{ color: "#6B6B66" }}>The Apothecary</Link></li>
                 <li><Link href="/author/the-oracle-lover" style={{ color: "#6B6B66" }}>The Oracle Lover</Link></li>
                 <li><Link href="/search" style={{ color: "#6B6B66" }}>Search</Link></li>
               </ul>
@@ -67,7 +70,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             </div>
           </div>
           <div className="mt-8 pt-6 border-t text-xs" style={{ borderColor: "rgba(43,43,43,0.10)", color: "#6B6B66" }}>
-            © {new Date().getFullYear()} Single by Design. All essays reviewed by The Oracle Lover.
+            © {new Date().getFullYear()} I Choose Single. All essays reviewed by The Oracle Lover.
             We participate in the Amazon Associates program; product links may earn us a small commission.
           </div>
         </div>
