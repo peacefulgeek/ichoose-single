@@ -121,7 +121,6 @@ export function buildRobotsTxt(): string {
     "User-agent: *",
     "Allow: /",
     "Disallow: /api/",
-    "Disallow: /manus-storage/",
     "",
     "# Explicitly allow named AI / retrieval bots",
     ...bots.flatMap(b => [`User-agent: ${b}`, "Allow: /", "Disallow: /api/", ""]),

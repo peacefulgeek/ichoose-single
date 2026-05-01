@@ -26,16 +26,18 @@ describe("I Choose Single — quality gate", () => {
   });
 
   it("hits the sister-site backlink rate over the topic bank (target 23%)", async () => {
-    const sample = TOPIC_BANK.slice(0, 32);
+    // Sample the entire topic bank to remove sub-sample bias from a 1-in-4
+    // deterministic hash bucket. Target band is 18% – 32% (around 23%).
+    const sample = TOPIC_BANK;
     let withSister = 0;
     for (const t of sample) {
       const { article } = await generateOneArticle({ topicOverride: t });
       if (article.body.includes(AUTHOR_SISTER_SITE)) withSister++;
     }
     const rate = withSister / sample.length;
-    expect(rate).toBeGreaterThanOrEqual(0.2);
-    expect(rate).toBeLessThanOrEqual(0.4);
-  });
+    expect(rate).toBeGreaterThanOrEqual(0.18);
+    expect(rate).toBeLessThanOrEqual(0.32);
+  }, 60_000);
 
   it("builds a deterministic Bunny CDN hero URL", () => {
     const url = heroUrlForSlug("the-quiet-power-of-choosing-yourself-first");

@@ -107,11 +107,11 @@ async function uploadToBunny(remotePath, bytes, contentType = "image/webp") {
 
 async function main() {
   console.log(`[bunny] uploading to zone ${STORAGE_ZONE} via ${STORAGE_HOST}`);
-  // 1) Fetch slugs
-  const r = await fetch(`${SITE_URL}/api/articles?limit=200`);
+  // 1) Fetch slugs (admin endpoint returns ALL — published + queued)
+  const r = await fetch(`${SITE_URL}/api/admin/all-slugs`);
   if (!r.ok) throw new Error(`fetch articles failed: ${r.status}`);
   const { articles } = await r.json();
-  console.log(`[bunny] ${articles.length} articles`);
+  console.log(`[bunny] ${articles.length} articles (published + queued)`);
 
   const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "ichoose-bunny-"));
   let ok = 0, fail = 0;

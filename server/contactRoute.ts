@@ -1,24 +1,64 @@
 /**
  * /api/contact — accepts a name + email + message, validates lightly, and
- * uses the platform's notifyOwner helper to deliver to the editor inbox.
+ * delivers via Nodemailer if SMTP env is configured.
  *
- * No third-party email service is used (master scope hard rule). If
- * notifyOwner is unavailable, the submission is logged to stdout and the
- * client gets a 202 so the form still feels successful in dev.
+ * Per master scope hard rule: "No third-party email beyond Nodemailer."
+ *
+ * If SMTP_HOST / SMTP_USER / SMTP_PASS / CONTACT_TO are not present, the
+ * submission is appended to a local log file and the client gets a 202 so
+ * the form still feels successful. No Manus runtime is imported.
  */
 import { Express } from "express";
+import fs from "node:fs";
+import path from "node:path";
 
-type NotifyFn = (m: { title: string; content: string }) => Promise<boolean>;
-let notifyOwnerFn: NotifyFn | undefined;
-async function loadNotifier(): Promise<NotifyFn | undefined> {
-  if (notifyOwnerFn) return notifyOwnerFn;
-  try {
-    const mod: any = await import("./_core/notification");
-    notifyOwnerFn = mod.notifyOwner;
-  } catch {
-    notifyOwnerFn = undefined;
+type Mailer = {
+  send: (m: { to: string; from: string; subject: string; text: string }) => Promise<void>;
+};
+
+let cachedMailer: Mailer | null | undefined;
+async function loadMailer(): Promise<Mailer | null> {
+  if (cachedMailer !== undefined) return cachedMailer;
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!host || !user || !pass) {
+    cachedMailer = null;
+    return null;
   }
-  return notifyOwnerFn;
+  try {
+    const nodemailer: any = await import("nodemailer").catch(() => null);
+    if (!nodemailer) {
+      cachedMailer = null;
+      return null;
+    }
+    const transporter = nodemailer.default.createTransport({
+      host,
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: process.env.SMTP_SECURE === "true",
+      auth: { user, pass },
+    });
+    cachedMailer = {
+      async send({ to, from, subject, text }) {
+        await transporter.sendMail({ to, from, subject, text });
+      },
+    };
+  } catch {
+    cachedMailer = null;
+  }
+  return cachedMailer;
+}
+
+function logFallback(title: string, content: string) {
+  const dir = "/home/ubuntu/single-by-design/.contact-log";
+  try {
+    fs.mkdirSync(dir, { recursive: true });
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    fs.writeFileSync(path.join(dir, `${stamp}.txt`), `${title}\n\n${content}`, "utf8");
+  } catch {
+    /* swallow — at worst we log to stdout */
+  }
+  console.log("[contact-fallback]", title, "\n", content);
 }
 
 export function registerContactRoute(app: Express) {
@@ -33,17 +73,20 @@ export function registerContactRoute(app: Express) {
     const safe = (s: string) => String(s).slice(0, 4000).replace(/[<>]/g, "");
     const title = `[I Choose Single] new message from ${safe(name)}`;
     const content = `From: ${safe(name)} <${safe(email)}>\n\n${safe(message)}`;
+    const to = process.env.CONTACT_TO;
+    const from = process.env.CONTACT_FROM || `noreply@ichoosesingle.com`;
+    const mailer = to ? await loadMailer() : null;
     let delivered = false;
-    const notifier = await loadNotifier();
-    if (typeof notifier === "function") {
+    if (mailer && to) {
       try {
-        delivered = await notifier({ title, content });
+        await mailer.send({ to, from, subject: title, text: content });
+        delivered = true;
       } catch (e: any) {
-        console.warn("[contact] notifyOwner failed:", e.message);
+        console.warn("[contact] mailer failed:", e?.message);
+        logFallback(title, content);
       }
     } else {
-      console.log("[contact] (no notifier) ", title, "\n", content);
-      delivered = true;
+      logFallback(title, content);
     }
     return res.status(delivered ? 200 : 202).json({ ok: true, delivered });
   });

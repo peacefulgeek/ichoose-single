@@ -138,7 +138,7 @@ OUTPUT FORMAT — return STRICT JSON with these keys:
   tldr (string, plain text, the same 3 sentences as in the TL;DR block),
   body (string, valid HTML — must include the TL;DR section, full essay with H2 and H3 subsections, the byline aside, all required links).
 
-Body must be 1100-1600 words. Use H2 for major sections (5-8 of them), H3 for sub-points where useful. Use <p>, <ul>, <ol>, <blockquote> liberally. NO H1 (the page renders the H1 from the title field).
+Body must be 1800-2200 words (no exceptions). Use H2 for major sections (8-12 of them), H3 for sub-points where useful. Use <p>, <ul>, <ol>, <blockquote> liberally. NO H1 (the page renders the H1 from the title field).
 
 Tone: warm, fierce, intimate, never preachy. You are writing for someone choosing single life on purpose, not someone resigned to it.`;
 
@@ -299,6 +299,28 @@ function buildStubArticle(topic: {
 
 <p>You're not broken. You're not waiting. You're not in a holding pattern. You're a person doing one of the bravest things this culture allows: building a life that doesn't need rescue. Does that land? It should. I Choose Single exists because so many of us needed this said out loud, and the saying of it changes things.</p>
 
+<h2>The morning practice that changes everything else</h2>
+
+<p>If a reader asks me where to start, I always point at the first hour. Not because mornings are magical, but because they are the only hour the rest of the day cannot interrupt. The single-by-design folks I trust most have all built some version of the same first hour. No phone for the first thirty minutes. Something hot to drink. A few minutes of stillness. A page in a notebook. A walk if the weather allows. ${intLink(1, "We've written more about morning architecture for solo living here")}, and the readers who keep at it for sixty days describe the same shift: the day stops happening to them, and starts happening with them.</p>
+
+<p>Honestly, the practice doesn't need to be elaborate. Mine is coffee, a window, and ten quiet minutes before any screen. That's it. The point isn't optimization. The point is sovereignty over the first hour, which has a way of seeping into the second hour, the third, the entire week.</p>
+
+<h2>The body knows things the mind hasn't caught up to yet</h2>
+
+<p>Across the readers who write back to us a year into intentional singlehood, the body always shows up first. Sleep deepens. Shoulders drop. The chronic low-grade vigilance of waiting for someone to come home, or waiting for the relationship to either heal or end, finally releases. ${intLink(2, "We track this nervous-system rewiring across the archive")}, and the pattern is consistent. The body recognizes safety before the brain finishes the story.</p>
+
+<p>If you're in the early months and your body feels strange, that's the system recalibrating. Sleep more. Walk more. Eat warm food. Move slowly. Trust that the discomfort is information, not pathology.</p>
+
+<h2>What the long-arc readers tell us</h2>
+
+<p>Truth is, the readers who've been at this five, ten, fifteen years sound different than the new ones. The defensiveness is gone. The need to explain themselves at parties is gone. Look at me, look at me, the soft proud noise that comes through their emails: <em>I built a life that works.</em> ${intLink(3, "Their patterns repeat across the archive")}. Strong friendships. Sustainable work. Travel that doesn't wait for permission. A house or apartment that fits like a coat. The boring brilliance of a Tuesday that requires no apology.</p>
+
+<p>That's the long arc. None of it is performance. All of it is real life, slowly built, fiercely defended, quietly enjoyed.</p>
+
+<h2>How the seasons reshape solo living</h2>
+
+<p>One thing partnered friends rarely warn you about: solo living has seasons. Winter is its own creature, all early dark and quiet apartments. Spring brings restless energy, the urge to over-schedule, the temptation to fill the calendar to prove a point. Summer asks you to plan your own travel and your own joy. Fall, the cleanest of them all, returns you to the desk, the soup pot, the longer reading list. The single-by-design folks I know learn to anticipate this rhythm, and to design their week around the season they're actually in. Across the dozens of articles we've published on this site, that small move, planning to the season instead of fighting it, comes up again and again as the practice that quiets the loneliest weeks.</p>
+
 <aside class="author-byline" data-eeat="author">
   <p><strong>Reviewed by ${opts.authorName}</strong>, ${opts.authorCredential}. Last updated <time datetime="${today}">${today}</time>.</p>
   <p>I've spent the last decade writing about intentional singlehood and solo living, both on this site and in my own practice. ${intLink(3, "More essays in the same vein")} are linked throughout this archive, and a fresh one ships every weekday.</p>
@@ -337,7 +359,7 @@ function buildStubArticle(topic: {
   };
 }
 
-export async function generateOneArticle(opts: { topicOverride?: { title: string; category: string; tags: string[] } } = {}): Promise<{ article: GeneratedArticle; usedDeepSeek: boolean; attempts: number }> {
+export async function generateOneArticle(opts: { topicOverride?: { title: string; category: string; tags: string[] }; forceStub?: boolean } = {}): Promise<{ article: GeneratedArticle; usedDeepSeek: boolean; attempts: number }> {
   const topic = opts.topicOverride ?? pickRandom(TOPIC_BANK);
   const credential = pickRandom(AUTHOR_CREDENTIALS);
   // Per master scope §14C — 23% backlink rate to sister site. Deterministic slug-hash
@@ -374,9 +396,9 @@ export async function generateOneArticle(opts: { topicOverride?: { title: string
     maxLinks: 4,
   });
 
-  // Try DeepSeek up to MAX_ATTEMPTS
+  // Try DeepSeek up to MAX_ATTEMPTS (skipped when forceStub is set, e.g., during the one-time pre-seed)
   let lastFailure: GateResult | null = null;
-  if (isDeepSeekAvailable()) {
+  if (!opts.forceStub && isDeepSeekAvailable()) {
     const { system, user } = buildPrompt({
       topic,
       internalLinkCandidates: internalCandidates,

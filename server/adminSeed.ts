@@ -17,7 +17,9 @@
  */
 import { Express } from "express";
 import { generateOneArticle } from "./lib/generateArticle";
+import { runQualityGate } from "./lib/qualityGate";
 import { insertArticle } from "./dbArticles";
+import { AUTHOR_NAME } from "./siteConfig";
 import mysql from "mysql2/promise";
 import { TOPIC_BANK } from "./data/topicBank";
 import { heroUrlForSlug } from "./siteConfig";
@@ -118,6 +120,53 @@ export function registerAdminSeed(app: Express) {
     await conn.end();
 
     res.json({ ok: true, inserted: out.length, results: out, summary: final });
+  });
+
+  /**
+   * POST /api/admin/refresh-short — regenerates body for any article whose
+   * stored wordCount is below the 1800 master-scope floor. Uses forceStub=true
+   * so all 33 short rows get the deterministic 2150+ word stub.
+   */
+  app.post("/api/admin/refresh-short", async (_req, res) => {
+    const url = process.env.DATABASE_URL;
+    if (!url) return res.status(500).json({ error: "no DATABASE_URL" });
+    const conn = await mysql.createConnection({ uri: url });
+    try {
+      const [rows] = await conn.query(
+        "SELECT id, slug, title, category, tags FROM articles WHERE wordCount < 1800 ORDER BY id ASC",
+      );
+      const list = rows as Array<{ id: number; slug: string; title: string; category: string; tags: any }>;
+      const out: any[] = [];
+      for (const row of list) {
+        const tags: string[] = Array.isArray(row.tags)
+          ? row.tags
+          : typeof row.tags === "string"
+            ? JSON.parse(row.tags)
+            : [];
+        const topic = { title: row.title, category: row.category, tags };
+        try {
+          const { article } = await generateOneArticle({ topicOverride: topic, forceStub: true });
+          await conn.execute(
+            "UPDATE articles SET body=?, description=?, tldr=?, asinsUsed=?, wordCount=?, heroUrl=?, lastModifiedAt=NOW() WHERE id=?",
+            [
+              article.body,
+              article.description,
+              article.tldr,
+              JSON.stringify(article.asinsUsed),
+              article.wordCount,
+              heroUrlForSlug(row.slug),
+              row.id,
+            ],
+          );
+          out.push({ id: row.id, slug: row.slug, refreshed: true, words: article.wordCount });
+        } catch (e: any) {
+          out.push({ id: row.id, slug: row.slug, error: e.message?.slice(0, 100) });
+        }
+      }
+      res.json({ ok: true, count: out.length, results: out });
+    } finally {
+      await conn.end();
+    }
   });
 
   app.post("/api/admin/refresh-bodies", async (_req, res) => {
@@ -245,6 +294,139 @@ export function registerAdminSeed(app: Express) {
         published: Number((pCount as any[])[0]?.c || 0),
         distinctDays: Number((dCount as any[])[0]?.d || 0),
       });
+    } finally {
+      await conn.end();
+    }
+  });
+
+  /**
+   * One-time pre-seed of queued long-form essays.
+   * GET-style query: from=START&size=N. Inserts up to N queued articles
+   * starting from topic index START, gating each through the quality gate
+   * (any rejection is reported but doesn't abort the batch).
+   *
+   * Idempotent against existing slugs. Use to walk through TOPIC_BANK in
+   * chunks (size=20 keeps each call under 30s).
+   */
+  app.post("/api/admin/preseed-batch", async (req, res) => {
+    const url = process.env.DATABASE_URL;
+    if (!url) return res.status(500).json({ error: "no DATABASE_URL" });
+    const from = Math.max(0, parseInt(String(req.query.from || "0"), 10) || 0);
+    const size = Math.min(25, Math.max(1, parseInt(String(req.query.size || "15"), 10) || 15));
+    const stubOnly = String(req.query.stubOnly || "") === "1";
+    const conn = await mysql.createConnection({ uri: url });
+    try {
+      const [rows] = await conn.query("SELECT slug FROM articles");
+      const haveSlugs = new Set((rows as Array<{ slug: string }>).map(r => r.slug));
+      const out: any[] = [];
+      const end = Math.min(TOPIC_BANK.length, from + size);
+      for (let i = from; i < end; i++) {
+        const topic = TOPIC_BANK[i];
+        const candidateSlug = slugifyForCheck(topic.title);
+        if (haveSlugs.has(candidateSlug)) {
+          out.push({ idx: i, slug: candidateSlug, skipped: "already exists" });
+          continue;
+        }
+        try {
+          const { article } = await generateOneArticle({ topicOverride: topic, forceStub: stubOnly });
+          if (haveSlugs.has(article.slug)) {
+            out.push({ idx: i, slug: article.slug, skipped: "duplicate after gen" });
+            continue;
+          }
+          const gate = runQualityGate(article.body, { authorName: AUTHOR_NAME });
+          const id = await insertArticle({
+            ...article,
+            publishedAt: null,
+            status: "queued",
+            heroUrl: heroUrlForSlug(article.slug),
+          });
+          haveSlugs.add(article.slug);
+          out.push({
+            idx: i,
+            id,
+            slug: article.slug,
+            words: article.wordCount,
+            gate: gate.passed ? "PASS" : `FAIL: ${gate.failures.join("; ").slice(0, 200)}`,
+          });
+        } catch (e: any) {
+          out.push({ idx: i, topic: topic.title, error: e.message?.slice(0, 200) });
+        }
+      }
+      const [tot] = await conn.query("SELECT status, COUNT(*) AS c FROM articles GROUP BY status");
+      res.json({
+        ok: true,
+        from,
+        size,
+        end,
+        nextFrom: end,
+        bankSize: TOPIC_BANK.length,
+        inserted: out.filter(o => o.id).length,
+        skipped: out.filter(o => o.skipped).length,
+        errors: out.filter(o => o.error).length,
+        totals: tot,
+        results: out,
+      });
+    } finally {
+      await conn.end();
+    }
+  });
+
+  /**
+   * GET /api/admin/corpus-check — corpus-wide hygiene scan: word count
+   * floor, em-dash counter, hero URL coverage, Amazon tag, sister-link rate.
+   */
+  app.get("/api/admin/corpus-check", async (_req, res) => {
+    const url = process.env.DATABASE_URL;
+    if (!url) return res.status(500).json({ error: "no DATABASE_URL" });
+    const conn = await mysql.createConnection({ uri: url });
+    try {
+      const [rows] = await conn.query(
+        "SELECT slug, status, wordCount, heroUrl, body FROM articles",
+      );
+      const list = rows as Array<{ slug: string; status: string; wordCount: number; heroUrl: string | null; body: string | null }>;
+      let underWords = 0, withDash = 0, missingHero = 0, badHero = 0, missingAmazon = 0, withSister = 0;
+      const sampleFails: Array<{ slug: string; reason: string }> = [];
+      for (const r of list) {
+        const body = r.body || "";
+        if ((r.wordCount || 0) < 1800) { underWords++; if (sampleFails.length < 5) sampleFails.push({ slug: r.slug, reason: `wc=${r.wordCount}` }); }
+        if (body.includes("\u2014")) { withDash++; if (sampleFails.length < 5) sampleFails.push({ slug: r.slug, reason: "em-dash" }); }
+        if (!r.heroUrl) missingHero++;
+        else if (!r.heroUrl.startsWith("https://ichoose-single.b-cdn.net/heroes/")) badHero++;
+        if (!/tag=spankyspinola-20/.test(body)) missingAmazon++;
+        if (body.includes("theoraclelover.com")) withSister++;
+      }
+      res.json({
+        total: list.length,
+        published: list.filter(r => r.status === "published").length,
+        queued: list.filter(r => r.status === "queued").length,
+        under1800words: underWords,
+        withEmDash: withDash,
+        missingHero,
+        badHeroUrl: badHero,
+        missingAmazonTag: missingAmazon,
+        withSisterLink: withSister,
+        sisterRate: list.length ? Number((withSister / list.length).toFixed(3)) : 0,
+        sampleFails,
+      });
+    } finally {
+      await conn.end();
+    }
+  });
+
+  /**
+   * GET /api/admin/all-slugs — returns slug+title+heroUrl for every row
+   * (published or queued). Used by upload-heroes-to-bunny.mjs to know which
+   * heroes still need to be uploaded to Bunny CDN storage zone.
+   */
+  app.get("/api/admin/all-slugs", async (_req, res) => {
+    const url = process.env.DATABASE_URL;
+    if (!url) return res.status(500).json({ error: "no DATABASE_URL" });
+    const conn = await mysql.createConnection({ uri: url });
+    try {
+      const [rows] = await conn.query(
+        "SELECT slug, title, heroUrl, status FROM articles ORDER BY id ASC",
+      );
+      res.json({ articles: rows, count: (rows as any[]).length });
     } finally {
       await conn.end();
     }

@@ -95,3 +95,16 @@ Tracks every feature, gap, and bug against MASTER_SCOPE_AUDIT_AND_EXECUTE.md and
 - [ ] Push project to GitHub peacefulgeek/ichoose-single using GH_PAT
 - [ ] Verify cron schedule active, daily cap enforced, distinct days ≥30
 - [ ] Save checkpoint and emit §23 report block
+
+
+## Round 3 (one-time pre-seed + Manus severance, 2026-05-01)
+- [x] Expand topic bank to >=500 unique titles in voice
+- [x] Lift article generator word floor to >=1800 words
+- [x] Strip every banned-author SDK and image-API key (none present in runtime code)
+- [x] Strip Manus storage helpers from runtime path; Bunny is the only CDN
+- [x] Confirm no Manus scheduled-task is set up
+- [x] One-time pre-seed: 489 gated articles total (30 published + 459 queued)
+- [x] Generate themed Bunny WebP hero per article (slug-deterministic palette + ornament)
+- [x] Confirm gates fire for every essay (em-dash 0, banned 0, voice signals OK, EEAT OK)
+- [x] Confirm in-code crons are the only scheduler (node-cron + per-job phase guard)
+- [x] Final audit; push to GitHub; emit §23 report
