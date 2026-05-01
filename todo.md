@@ -108,3 +108,20 @@ Tracks every feature, gap, and bug against MASTER_SCOPE_AUDIT_AND_EXECUTE.md and
 - [x] Confirm gates fire for every essay (em-dash 0, banned 0, voice signals OK, EEAT OK)
 - [x] Confirm in-code crons are the only scheduler (node-cron + per-job phase guard)
 - [x] Final audit; push to GitHub; emit §23 report
+
+
+## Round 4 — Full design rebuild (2026-05-01, user feedback)
+- [ ] New palette: deep magenta/plum, electric coral, lush teal, sun gold, ink black on warm ivory — NOT cream + orange button
+- [ ] New type ramp: editorial display serif (Fraunces/Playfair) + warm humanist sans (Inter) — Bunny-hosted
+- [ ] Unique AI-generated hero image per article (489 images, vibrant editorial style), compressed WebP, on Bunny CDN
+- [ ] Site-level imagery: homepage hero collage, About portrait scene, Assessments hero, Apothecary hero, Contact hero
+- [ ] Homepage redesign: full-bleed magazine hero, asymmetric featured-essay block, vibrant color-blocked section breaks, motion
+- [ ] Article page redesign: immersive cinematic hero (parallax overlay), drop-cap intro, in-prose pull quotes, sticky pill-TOC, end-of-article CTA card
+- [ ] Assessments page: tile grid with unique illustration per quiz
+- [ ] Apothecary page: editorial product cards with hero band
+- [ ] About page: portrait + manifesto split layout
+- [ ] Contact page: warm split layout with image
+- [ ] Mobile bottom bar: glass-morphism, vibrant active state
+- [ ] All images uploaded as compressed WebP to Bunny CDN; zero local images
+- [ ] Vitest + guards green
+- [ ] Push to GitHub, save checkpoint

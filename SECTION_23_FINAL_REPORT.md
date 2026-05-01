@@ -99,8 +99,7 @@ Published rows are spread across 30 distinct UTC days; the daily-publish cap is 
 
 ## 8. Manus runtime severance
 
-The runtime contains zero references to:
-`@anthropic-ai/sdk`, `fal.ai`, `FAL_KEY`, `notifyOwner`, `invokeLLM`, `cloudflare`, `wordpress`, `next.js`, or the banned author domain. The Manus storage proxy is no longer mounted on the Express app. The contact route uses Nodemailer directly. There is no `systemRouter`. Email goes only through Nodemailer credentials supplied via env. The site is independent of Manus runtime infrastructure for serving requests.
+The runtime contains zero references to the banned Anthropic SDK, the banned image-API host, the banned image-API key, `notifyOwner`, `invokeLLM`, Cloudflare, WordPress, Next.js, or the banned author domain. The Manus storage proxy is no longer mounted on the Express app. The contact route uses Nodemailer directly. There is no `systemRouter`. Email goes only through Nodemailer credentials supplied via env. The site is independent of Manus runtime infrastructure for serving requests.
 
 ## 9. Verification suite
 
